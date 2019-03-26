@@ -16,6 +16,7 @@
 		3CE237902247A8340049C29B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CE2378E2247A8340049C29B /* LaunchScreen.storyboard */; };
 		3CE998632247FAE3002CC0F3 /* gilroy-extrabold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CE998612247FAE2002CC0F3 /* gilroy-extrabold.ttf */; };
 		3CE998642247FAE3002CC0F3 /* Radomir Tinkov - Gilroy-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CE998622247FAE2002CC0F3 /* Radomir Tinkov - Gilroy-Light.otf */; };
+		3CEF72FC224A515A00000936 /* GameCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF72FB224A515A00000936 /* GameCollectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		3CE237912247A8340049C29B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CE998612247FAE2002CC0F3 /* gilroy-extrabold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-extrabold.ttf"; sourceTree = "<group>"; };
 		3CE998622247FAE2002CC0F3 /* Radomir Tinkov - Gilroy-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radomir Tinkov - Gilroy-Light.otf"; sourceTree = "<group>"; };
+		3CEF72FB224A515A00000936 /* GameCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				3CE237822247A82F0049C29B /* AppDelegate.swift */,
 				3CDE52262247E5720064BF37 /* GameViewController.swift */,
 				3CE237842247A82F0049C29B /* MainMenuViewController.swift */,
+				3CEF72FB224A515A00000936 /* GameCollectionCell.swift */,
 				3CE237862247A82F0049C29B /* Main.storyboard */,
 				3CE2378C2247A8340049C29B /* Assets.xcassets */,
 				3CE2378E2247A8340049C29B /* LaunchScreen.storyboard */,
@@ -161,6 +164,7 @@
 				3CE237852247A82F0049C29B /* MainMenuViewController.swift in Sources */,
 				3CE2378B2247A82F0049C29B /* MineSweeper.xcdatamodeld in Sources */,
 				3CE237832247A82F0049C29B /* AppDelegate.swift in Sources */,
+				3CEF72FC224A515A00000936 /* GameCollectionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
