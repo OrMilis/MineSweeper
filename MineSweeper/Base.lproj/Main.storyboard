@@ -58,7 +58,7 @@
         <!--Game View Controller-->
         <scene sceneID="1rq-ml-pF3">
             <objects>
-                <viewController id="AZv-A0-8Wc" customClass="GameViewController" customModule="MineSweeper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameView" id="AZv-A0-8Wc" customClass="GameViewController" customModule="MineSweeper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YpF-89-EtU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -112,6 +112,10 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="AZv-A0-8Wc" id="kSJ-WV-WjJ"/>
+                                    <outlet property="delegate" destination="AZv-A0-8Wc" id="DWt-4e-8eu"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.99607843137254903" green="0.94901960784313721" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>

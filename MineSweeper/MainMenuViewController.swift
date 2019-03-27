@@ -24,6 +24,10 @@ class MainMenuViewController: UIViewController {
     @IBAction func nameBtnOnClick(_ sender: Any) {
         guard let nickname = nameTextBox.text else { return; };
         nameLabel.text = nickname;
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil);
+        let gameViewController = storyBoard.instantiateViewController(withIdentifier: "GameView") as! GameViewController;
+        self.present(gameViewController, animated: true, completion: nil);
     }
     
 }
