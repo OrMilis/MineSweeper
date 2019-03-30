@@ -10,11 +10,19 @@ import UIKit
 
 class GameViewController: UIViewController {
 
-    let items = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"]
+    var items = [[Int]](repeating: [Int](repeating: 0, count: 10), count:10);
+    var index = 0;
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        for (sectionIndex, section) in items.enumerated() {
+            for (itemIndex, _) in section.enumerated() {
+                let value = sectionIndex * 10 + itemIndex;
+                items[sectionIndex][itemIndex] = value;
+                print(sectionIndex, itemIndex, value, separator: "  ");
+            }
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -33,22 +41,34 @@ class GameViewController: UIViewController {
 
 extension GameViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return items[0].count;
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return items.count;
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCell", for: indexPath) as! GameCollectionCell;
         
-        cell.cellText.text = items[indexPath.item];
+        let item = items[indexPath.section][indexPath.item];
+        print("item: ", item);
+        cell.cellText.text = "\(item)";
         return cell;
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item);
+        let cell = collectionView.cellForItem(at: indexPath) as! GameCollectionCell;
+        guard let cellText = cell.cellText.text else { return; };
+        print(cellText);
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = collectionView.bounds.width / 10;
+        
+        let numberOfBoard = items.count;
+        print("top: ", collectionView.layoutMargins.top);
+        let spacingSize = collectionView.layoutMargins.top * CGFloat(numberOfBoard + 1);
+        let cellWidth = (collectionView.bounds.width - spacingSize) / 10;
         let cellHeight = cellWidth;
         
         return CGSize(width: cellWidth, height: cellHeight);

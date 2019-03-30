@@ -77,35 +77,44 @@
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dvg-16-91a">
                                 <rect key="frame" x="16" y="304" width="343" height="343"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Bb9-2k-ukf">
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="3" minimumInteritemSpacing="3" id="Bb9-2k-ukf">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="3" minY="3" maxX="3" maxY="3"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GameCell" id="9SG-V7-M4V" customClass="GameCollectionCell" customModule="MineSweeper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="3" y="3" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CellText" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipk-3V-3CV">
-                                                    <rect key="frame" x="0.0" y="15" width="50" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CellText" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipk-3V-3CV">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fsj-e5-lLD" userLabel="CellImage">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fsj-e5-lLD" userLabel="CellImage">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="fsj-e5-lLD" firstAttribute="centerX" secondItem="9SG-V7-M4V" secondAttribute="centerX" id="59g-bU-9Uw"/>
+                                            <constraint firstItem="fsj-e5-lLD" firstAttribute="width" secondItem="9SG-V7-M4V" secondAttribute="width" id="BZl-Vy-emk"/>
+                                            <constraint firstItem="ipk-3V-3CV" firstAttribute="centerY" secondItem="9SG-V7-M4V" secondAttribute="centerY" id="FfG-ty-6fp"/>
+                                            <constraint firstItem="ipk-3V-3CV" firstAttribute="height" secondItem="9SG-V7-M4V" secondAttribute="height" id="N4g-Sz-Ofi"/>
+                                            <constraint firstItem="fsj-e5-lLD" firstAttribute="centerY" secondItem="9SG-V7-M4V" secondAttribute="centerY" id="fcY-9m-ivs"/>
+                                            <constraint firstItem="ipk-3V-3CV" firstAttribute="centerX" secondItem="9SG-V7-M4V" secondAttribute="centerX" id="gLI-LF-7vr"/>
+                                            <constraint firstItem="fsj-e5-lLD" firstAttribute="height" secondItem="9SG-V7-M4V" secondAttribute="height" id="h4R-B1-VnQ"/>
+                                            <constraint firstItem="ipk-3V-3CV" firstAttribute="width" secondItem="9SG-V7-M4V" secondAttribute="width" id="l4g-sI-X7r"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="cellImage" destination="fsj-e5-lLD" id="LCl-Ln-qHs"/>
                                             <outlet property="cellText" destination="ipk-3V-3CV" id="KFA-ia-B1P"/>
