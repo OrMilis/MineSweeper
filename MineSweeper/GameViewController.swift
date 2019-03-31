@@ -10,6 +10,8 @@ import UIKit
 
 class GameViewController: UIViewController {
 
+    private let sectionInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 0.0, right: 5.0);
+    
     var items = [[Int]](repeating: [Int](repeating: 0, count: 10), count:10);
     var index = 0;
     
@@ -40,19 +42,20 @@ class GameViewController: UIViewController {
 }
 
 extension GameViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items[0].count;
-    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return items.count;
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return items[0].count;
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCell", for: indexPath) as! GameCollectionCell;
         
         let item = items[indexPath.section][indexPath.item];
-        print("item: ", item);
+        //print("item: ", item);
         cell.cellText.text = "\(item)";
         return cell;
     }
@@ -65,14 +68,26 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let numberOfBoard = items.count;
-        print("top: ", collectionView.layoutMargins.top);
-        let spacingSize = collectionView.layoutMargins.top * CGFloat(numberOfBoard + 1);
-        let cellWidth = (collectionView.bounds.width - spacingSize) / 10;
-        let cellHeight = cellWidth;
+        let sizeOfBoard = CGFloat(items.count);
+        //print("top: ", collectionView.adjustedContentInset.top);
+        let paddingSpace = sectionInsets.left * (sizeOfBoard + 1);
+        let availableWidth = collectionView.frame.width - paddingSpace;
+        let cellWidth = availableWidth / sizeOfBoard;
         
-        return CGSize(width: cellWidth, height: cellHeight);
+        return CGSize(width: cellWidth, height: cellWidth);
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        print("Width: ", collectionView.frame.width, " Height: ", collectionView.frame.height);
+        return sectionInsets;
+    }
+ 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInsets.left;
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInsets.left;
+    }
 }
 

@@ -75,19 +75,21 @@
                                 <color key="textColor" red="0.86274509803921573" green="0.44313725490196076" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dvg-16-91a">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dvg-16-91a">
                                 <rect key="frame" x="16" y="304" width="343" height="343"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="3" minimumInteritemSpacing="3" id="Bb9-2k-ukf">
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dvg-16-91a" secondAttribute="height" multiplier="1:1" id="p6r-wb-GP8"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Bb9-2k-ukf">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="3" minY="3" maxX="3" maxY="3"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GameCell" id="9SG-V7-M4V" customClass="GameCollectionCell" customModule="MineSweeper" customModuleProvider="target">
-                                        <rect key="frame" x="3" y="3" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -128,6 +130,11 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.99607843137254903" green="0.94901960784313721" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="x0d-0X-yiX" firstAttribute="trailing" secondItem="dvg-16-91a" secondAttribute="trailing" constant="16" id="GIm-xf-xNa"/>
+                            <constraint firstItem="x0d-0X-yiX" firstAttribute="bottom" secondItem="dvg-16-91a" secondAttribute="bottom" constant="20" id="Om2-2x-e60"/>
+                            <constraint firstItem="dvg-16-91a" firstAttribute="leading" secondItem="x0d-0X-yiX" secondAttribute="leading" constant="16" id="keV-XM-P9f"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="x0d-0X-yiX"/>
                     </view>
                 </viewController>
