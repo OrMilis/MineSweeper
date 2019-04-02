@@ -48,7 +48,7 @@ class GameViewController: UIViewController {
         }
     }
     
-    func placeCellsValue() {
+    func calculateBombArea(bombRow: Int, bombCol: Int) {
         //TO DO: Implemetion of cell values calculation.
     }
     
