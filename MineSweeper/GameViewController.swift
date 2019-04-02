@@ -63,7 +63,19 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! GameCollectionCell;
         guard let cellText = cell.cellText.text else { return; };
-        print(cellText);
+        var indexPathArr = [IndexPath]();
+        items[indexPath.section][indexPath.item] = 1;
+        items[indexPath.section + 1][indexPath.item] = 2;
+        for sectionIndex in 0...9{
+            for itemIndex in 0...9{
+                indexPathArr.append(IndexPath(item: itemIndex, section: sectionIndex));
+            }
+        }
+        /*indexPathArr.append(IndexPath(item: indexPath.item, section: indexPath.section));
+        indexPathArr.append(IndexPath(item: indexPath.item, section: indexPath.section + 1));*/
+        print(items[indexPath.section][indexPath.item]);
+        collectionView.reloadItems(at: indexPathArr);
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -78,7 +90,7 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        print("Width: ", collectionView.frame.width, " Height: ", collectionView.frame.height);
+        //print("Width: ", collectionView.frame.width, " Height: ", collectionView.frame.height);
         return sectionInsets;
     }
  
