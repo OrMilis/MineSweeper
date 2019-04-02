@@ -15,6 +15,12 @@ class GameViewController: UIViewController {
     var items = [[Int]](repeating: [Int](repeating: 0, count: 10), count:10);
     var index = 0;
     
+    var gameBoard = [[CellData]]();
+    var bombPositions = [Int]();
+    
+    var boardSize = 0;
+    var bombCount = 0;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,7 +34,27 @@ class GameViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    func placeBombs(){
+        let maxPos = (boardSize * boardSize) - 1;
+        var avaliablePositions = Set<Int>(0...maxPos);
+        
+        for _ in 0...bombCount {
+            guard let bombPos = avaliablePositions.randomElement() else { return; };
+            let bombRowCol = (row: bombPos / 10, col: bombPos % 10);
+            gameBoard[bombRowCol.col][bombRowCol.row].setAsBomb();
+            
+            bombPositions.append(bombPos);
+            avaliablePositions.remove(bombPos);
+        }
+    }
+    
+    func placeCellsValue() {
+        //TO DO: Implemetion of cell values calculation.
+    }
+    
+    func notifyDataSetChanged(collectionView: UICollectionView, indexPathArr: [IndexPath]) {
+        collectionView.reloadItems(at: indexPathArr);
+    }
     /*
     // MARK: - Navigation
 
@@ -52,7 +78,7 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCell", for: indexPath) as! GameCollectionCell;
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ConstManager.GameCellID, for: indexPath) as! GameCollectionCell;
         
         let item = items[indexPath.section][indexPath.item];
         //print("item: ", item);
