@@ -15,11 +15,13 @@ class GameViewController: UIViewController {
     var items = [[Int]](repeating: [Int](repeating: 0, count: 10), count:10);
     var index = 0;
     
-    var gameBoard = [[CellData]]();
+    //var gameBoard = [[CellData]]();
     var bombPositions = [Int]();
     
     var boardSize = 0;
     var bombCount = 0;
+    
+    var gameBoard = GameBoard(boardSize: 10, bombCount: 20);
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,28 +30,12 @@ class GameViewController: UIViewController {
             for (itemIndex, _) in section.enumerated() {
                 let value = sectionIndex * 10 + itemIndex;
                 items[sectionIndex][itemIndex] = value;
-                print(sectionIndex, itemIndex, value, separator: "  ");
+                //print(sectionIndex, itemIndex, value, separator: "  ");
             }
         }
-        // Do any additional setup after loading the view.
-    }
-    
-    func placeBombs(){
-        let maxPos = (boardSize * boardSize) - 1;
-        var avaliablePositions = Set<Int>(0...maxPos);
         
-        for _ in 0...bombCount {
-            guard let bombPos = avaliablePositions.randomElement() else { return; };
-            let bombRowCol = (row: bombPos / 10, col: bombPos % 10);
-            gameBoard[bombRowCol.col][bombRowCol.row].setAsBomb();
-            
-            bombPositions.append(bombPos);
-            avaliablePositions.remove(bombPos);
-        }
-    }
-    
-    func calculateBombArea(bombRow: Int, bombCol: Int) {
-        //TO DO: Implemetion of cell values calculation.
+        gameBoard.setUpBoard();
+        // Do any additional setup after loading the view.
     }
     
     func notifyDataSetChanged(collectionView: UICollectionView, indexPathArr: [IndexPath]) {

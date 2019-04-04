@@ -8,6 +8,6 @@
 
 import UIKit
 
-final class ConstManager: NSObject {
+final class ConstManager {
     public static let GameCellID: String = "GameCell";
 }

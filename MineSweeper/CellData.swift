@@ -14,16 +14,28 @@ class CellData {
         case HIDDEN_VALUE, VALUE, BOMB, HIDDEN_BOMB
     }
     
-    var cellType: cellState?;
-    var cellValue: Int?;
+    private var cellType: cellState;
+    private var cellValue: Int;
     
     init(cellType: cellState, cellValue: Int) {
         self.cellType = cellType;
         self.cellValue = cellValue;
     }
     
-    func setAsBomb() {
-        cellType = cellState.BOMB;
-        cellValue = -1;
+    public func setAsBomb() {
+        self.cellType = cellState.HIDDEN_BOMB;
+        self.cellValue = -1;
+    }
+    
+    public func IncrementValue() {
+        self.cellValue += 1;
+    }
+    
+    public func GetCellType() -> cellState {
+        return self.cellType;
+    }
+    
+    public func GetCellValue() -> Int {
+        return self.cellValue;
     }
 }

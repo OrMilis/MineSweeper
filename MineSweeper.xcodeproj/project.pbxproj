@@ -18,6 +18,7 @@
 		3CE998642247FAE3002CC0F3 /* Radomir Tinkov - Gilroy-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CE998622247FAE2002CC0F3 /* Radomir Tinkov - Gilroy-Light.otf */; };
 		3CEA5A042253D34200009B94 /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA5A032253D34200009B94 /* CellData.swift */; };
 		3CEA5A062253D9DB00009B94 /* ConstManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA5A052253D9DB00009B94 /* ConstManager.swift */; };
+		3CECBE9922561AE9000E3487 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECBE9822561AE9000E3487 /* GameBoard.swift */; };
 		3CEF72FC224A515A00000936 /* GameCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF72FB224A515A00000936 /* GameCollectionCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		3CE998622247FAE2002CC0F3 /* Radomir Tinkov - Gilroy-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radomir Tinkov - Gilroy-Light.otf"; sourceTree = "<group>"; };
 		3CEA5A032253D34200009B94 /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
 		3CEA5A052253D9DB00009B94 /* ConstManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstManager.swift; sourceTree = "<group>"; };
+		3CECBE9822561AE9000E3487 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		3CEF72FB224A515A00000936 /* GameCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +91,7 @@
 				3CE237892247A82F0049C29B /* MineSweeper.xcdatamodeld */,
 				3CEA5A032253D34200009B94 /* CellData.swift */,
 				3CEA5A052253D9DB00009B94 /* ConstManager.swift */,
+				3CECBE9822561AE9000E3487 /* GameBoard.swift */,
 			);
 			path = MineSweeper;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 				3CEA5A062253D9DB00009B94 /* ConstManager.swift in Sources */,
 				3CE237852247A82F0049C29B /* MainMenuViewController.swift in Sources */,
 				3CE2378B2247A82F0049C29B /* MineSweeper.xcdatamodeld in Sources */,
+				3CECBE9922561AE9000E3487 /* GameBoard.swift in Sources */,
 				3CE237832247A82F0049C29B /* AppDelegate.swift in Sources */,
 				3CEF72FC224A515A00000936 /* GameCollectionCell.swift in Sources */,
 				3CEA5A042253D34200009B94 /* CellData.swift in Sources */,
