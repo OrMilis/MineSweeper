@@ -21,20 +21,17 @@ class GameViewController: UIViewController {
     var boardSize = 0;
     var bombCount = 0;
     
-    var gameBoard = GameBoard(boardSize: 10, bombCount: 20);
+    var gameBoard = GameBoard(boardSize: 10, bombCount: 10);
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        for (sectionIndex, section) in items.enumerated() {
+        /*for (sectionIndex, section) in items.enumerated() {
             for (itemIndex, _) in section.enumerated() {
                 let value = sectionIndex * 10 + itemIndex;
                 items[sectionIndex][itemIndex] = value;
                 //print(sectionIndex, itemIndex, value, separator: "  ");
             }
-        }
-        
-        gameBoard.setUpBoard();
+        }*/
         // Do any additional setup after loading the view.
     }
     
@@ -66,28 +63,29 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ConstManager.GameCellID, for: indexPath) as! GameCollectionCell;
         
-        let item = items[indexPath.section][indexPath.item];
-        //print("item: ", item);
-        cell.cellText.text = "\(item)";
+        let cellData = gameBoard.getCellDataAt(indexPath: indexPath);
+        let cellValue = cellData.GetCellValue();
+        
+        print("CELL VALUE: ", cellValue);
+        cell.cellText.text = "\(cellValue)";
+        if(cellValue == -1) {
+            cell.cellText.text = "X"
+        }
+        else if(cellValue == 0){
+            cell.cellText.text = ""
+        }
+        
         return cell;
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! GameCollectionCell;
-        guard let cellText = cell.cellText.text else { return; };
-        var indexPathArr = [IndexPath]();
-        items[indexPath.section][indexPath.item] = 1;
-        items[indexPath.section + 1][indexPath.item] = 2;
-        for sectionIndex in 0...9{
-            for itemIndex in 0...9{
-                indexPathArr.append(IndexPath(item: itemIndex, section: sectionIndex));
-            }
-        }
-        /*indexPathArr.append(IndexPath(item: indexPath.item, section: indexPath.section));
-        indexPathArr.append(IndexPath(item: indexPath.item, section: indexPath.section + 1));*/
-        print(items[indexPath.section][indexPath.item]);
-        collectionView.reloadItems(at: indexPathArr);
+        //let cell = collectionView.cellForItem(at: indexPath) as! GameCollectionCell;
+        let modifiedCells = gameBoard.touchCell(cellIndexPath: indexPath);
         
+        print("AfterClick: ");
+        dump(modifiedCells);
+        
+        notifyDataSetChanged(collectionView: collectionView, indexPathArr: modifiedCells);
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -10,20 +10,15 @@ import UIKit
 
 class CellData {
     
-    public enum cellState {
-        case HIDDEN_VALUE, VALUE, BOMB, HIDDEN_BOMB
+    public enum CellState {
+        case HIDDEN_VALUE, VALUE, HIDDEN_BOMB, BOMB, FLAG
     }
     
-    private var cellType: cellState;
-    private var cellValue: Int;
-    
-    init(cellType: cellState, cellValue: Int) {
-        self.cellType = cellType;
-        self.cellValue = cellValue;
-    }
+    private var cellType: CellState = CellState.HIDDEN_VALUE;
+    private var cellValue: Int = 0;
     
     public func setAsBomb() {
-        self.cellType = cellState.HIDDEN_BOMB;
+        self.cellType = CellState.HIDDEN_BOMB;
         self.cellValue = -1;
     }
     
@@ -31,7 +26,11 @@ class CellData {
         self.cellValue += 1;
     }
     
-    public func GetCellType() -> cellState {
+    public func OpenCell() {
+        self.cellType = CellState.VALUE;
+    }
+    
+    public func GetCellType() -> CellState {
         return self.cellType;
     }
     
