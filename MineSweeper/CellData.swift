@@ -16,6 +16,7 @@ class CellData {
     
     private var cellType: CellState = CellState.HIDDEN_VALUE;
     private var cellValue: Int = 0;
+    private var isCellOpen = false;
     
     public func setAsBomb() {
         self.cellType = CellState.HIDDEN_BOMB;
@@ -27,7 +28,16 @@ class CellData {
     }
     
     public func OpenCell() {
-        self.cellType = CellState.VALUE;
+        switch cellType {
+        case .HIDDEN_VALUE:
+            self.cellType = CellState.VALUE;
+        case .HIDDEN_BOMB:
+            self.cellType = CellState.BOMB;
+        default:
+            break;
+        }
+        
+        self.isCellOpen = true;
     }
     
     public func GetCellType() -> CellState {
@@ -36,5 +46,9 @@ class CellData {
     
     public func GetCellValue() -> Int {
         return self.cellValue;
+    }
+    
+    public func IsCellOpen() -> Bool {
+        return self.isCellOpen;
     }
 }

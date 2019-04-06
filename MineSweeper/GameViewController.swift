@@ -10,21 +10,19 @@ import UIKit
 
 class GameViewController: UIViewController {
 
-    private let sectionInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 0.0, right: 5.0);
+    private let sectionInsets = UIEdgeInsets(top: 4.0, left: 4.0, bottom: 0.0, right: 4.0);
     
-    var items = [[Int]](repeating: [Int](repeating: 0, count: 10), count:10);
-    var index = 0;
-    
-    //var gameBoard = [[CellData]]();
     var bombPositions = [Int]();
     
-    var boardSize = 0;
-    var bombCount = 0;
+    var boardSize = 5;
+    var bombCount = 10;
     
-    var gameBoard = GameBoard(boardSize: 10, bombCount: 10);
+    var gameBoard: GameBoard = GameBoard(boardSize: 1, bombCount: 1);
     
     override func viewDidLoad() {
+        gameBoard = GameBoard(boardSize: boardSize, bombCount: bombCount);
         super.viewDidLoad()
+        
         /*for (sectionIndex, section) in items.enumerated() {
             for (itemIndex, _) in section.enumerated() {
                 let value = sectionIndex * 10 + itemIndex;
@@ -53,27 +51,42 @@ class GameViewController: UIViewController {
 extension GameViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return items.count;
+        return boardSize;
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items[0].count;
+        return boardSize;
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ConstManager.GameCellID, for: indexPath) as! GameCollectionCell;
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UtilManager.GameCellID, for: indexPath) as! GameCollectionCell;
         
         let cellData = gameBoard.getCellDataAt(indexPath: indexPath);
         let cellValue = cellData.GetCellValue();
         
+        let cellText: String;
+        let cellTextColor: UtilManager.WarningColor;
+        let cellBackgroundColor = UtilManager.GetCellBackgroundColor(isCellOpen: cellData.IsCellOpen());
+        
         print("CELL VALUE: ", cellValue);
-        cell.cellText.text = "\(cellValue)";
-        if(cellValue == -1) {
-            cell.cellText.text = "X"
+        
+        if(cellValue > 0){
+            cellText = "\(cellValue)";
+            cellTextColor = UtilManager.WarningColor(rawValue: cellValue) ?? UtilManager.WarningColor.ONE;
+            
         }
-        else if(cellValue == 0){
-            cell.cellText.text = ""
+        else if(cellValue == -1){
+            cellText = "X";
+            cellTextColor = UtilManager.WarningColor.EIGHT;
         }
+        else {
+            cellText = "";
+            cellTextColor = UtilManager.WarningColor.ONE;
+        }
+        
+        cell.cellText.text = cellText;
+        cell.cellText.textColor = cellTextColor.GetColor();
+        cell.backgroundColor = cellBackgroundColor;
         
         return cell;
     }
@@ -90,7 +103,7 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let sizeOfBoard = CGFloat(items.count);
+        let sizeOfBoard = CGFloat(boardSize);
         //print("top: ", collectionView.adjustedContentInset.top);
         let paddingSpace = sectionInsets.left * (sizeOfBoard + 1);
         let availableWidth = collectionView.frame.width - paddingSpace;

@@ -68,8 +68,8 @@ class GameBoard {
     func calculateBombArea(bombTuple: (row: Int, col: Int)) {
         //TO DO: Implemetion of cell values calculation.
         let _ = iterateOnCellAreaWithBlock(cellTuple: bombTuple, block: { row, col -> (row: Int, col: Int) in
-            print("In Calc Block:");
-            print("Row: ", row, "Col: ", col);
+            /*print("In Calc Block:");
+            print("Row: ", row, "Col: ", col);*/
             let cell = board[row][col];
             if(cell.GetCellType() == CellData.CellState.HIDDEN_VALUE) {
                 cell.IncrementValue();
@@ -77,9 +77,9 @@ class GameBoard {
             return (row, col);
         });
     
-        print("Bombs At: ");
+        /*print("Bombs At: ");
         dump(bombPositions);
-        printBoard();
+        printBoard();*/
         
         /*print("CalcBombArea: ");
         dump(bombAreaArr);
@@ -109,7 +109,16 @@ class GameBoard {
         }
         
         //print("touchCell(cellIndex:) = ", cellIndex);
-        return openCell(cellIndex: cellIndex);
+        
+        let modifiedCells: [IndexPath];
+        if(isCellBomb(cellIndex: cellIndex)){
+            modifiedCells = openAll();
+        }
+        else {
+            modifiedCells = openCell(cellIndex: cellIndex);
+        }
+        
+        return modifiedCells;
     }
     
     func openCell(cellIndex: Int) -> [IndexPath] {
@@ -125,16 +134,19 @@ class GameBoard {
         
         switch cellType {
         case CellData.CellState.HIDDEN_VALUE:
+            
             cell.OpenCell();
+            indexPathArr.append(IndexPath(item: cellTuple.col, section: cellTuple.row));
+            
             if(cell.GetCellValue() > 0) {
-                indexPathArr.append(IndexPath(item: cellTuple.col, section: cellTuple.row));
+                return indexPathArr;
             }
             else {
                 let blockIndexPathArr =
                     iterateOnCellAreaWithBlock(cellTuple: cellTuple, block: { row, col -> [IndexPath] in
                         let tempTuple = (row, col);
-                        print("In OpenCell Block: ");
-                        print("Tuple: ", tempTuple);
+                        /*print("In OpenCell Block: ");
+                        print("Tuple: ", tempTuple);*/
                         return openCell(cellIndex: tupleToIndex(tuple: tempTuple));
                     });
                 for indexPathSubArr in blockIndexPathArr {
@@ -147,6 +159,24 @@ class GameBoard {
         default:
             return indexPathArr;
         }
+    }
+    
+    func openAll() -> [IndexPath]{
+        var indexPathArr = [IndexPath]();
+        for (section, cellSubArr) in board.enumerated() {
+            for (item, cell) in cellSubArr.enumerated() {
+                cell.OpenCell();
+                indexPathArr.append(IndexPath(item: item, section: section));
+            }
+        }
+        return indexPathArr;
+    }
+    
+    func isCellBomb(cellIndex: Int) -> Bool {
+        let cellTuple = indexToTuple(index: cellIndex);
+        let cellData = board[cellTuple.row][cellTuple.col];
+        
+        return cellData.GetCellType() == CellData.CellState.HIDDEN_BOMB ? true : false;
     }
     
     public func getCellDataAt(indexPath: IndexPath) -> CellData {

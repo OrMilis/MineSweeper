@@ -14,10 +14,10 @@
 		3CE2378B2247A82F0049C29B /* MineSweeper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3CE237892247A82F0049C29B /* MineSweeper.xcdatamodeld */; };
 		3CE2378D2247A8340049C29B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CE2378C2247A8340049C29B /* Assets.xcassets */; };
 		3CE237902247A8340049C29B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CE2378E2247A8340049C29B /* LaunchScreen.storyboard */; };
-		3CE998632247FAE3002CC0F3 /* gilroy-extrabold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CE998612247FAE2002CC0F3 /* gilroy-extrabold.ttf */; };
-		3CE998642247FAE3002CC0F3 /* Radomir Tinkov - Gilroy-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CE998622247FAE2002CC0F3 /* Radomir Tinkov - Gilroy-Light.otf */; };
+		3CE998632247FAE3002CC0F3 /* Gilroy-Extrabold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CE998612247FAE2002CC0F3 /* Gilroy-Extrabold.ttf */; };
+		3CE998642247FAE3002CC0F3 /* Gilroy-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CE998622247FAE2002CC0F3 /* Gilroy-Light.otf */; };
 		3CEA5A042253D34200009B94 /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA5A032253D34200009B94 /* CellData.swift */; };
-		3CEA5A062253D9DB00009B94 /* ConstManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA5A052253D9DB00009B94 /* ConstManager.swift */; };
+		3CEA5A062253D9DB00009B94 /* UtilManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA5A052253D9DB00009B94 /* UtilManager.swift */; };
 		3CECBE9922561AE9000E3487 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECBE9822561AE9000E3487 /* GameBoard.swift */; };
 		3CEF72FC224A515A00000936 /* GameCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF72FB224A515A00000936 /* GameCollectionCell.swift */; };
 /* End PBXBuildFile section */
@@ -32,10 +32,10 @@
 		3CE2378C2247A8340049C29B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3CE2378F2247A8340049C29B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CE237912247A8340049C29B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3CE998612247FAE2002CC0F3 /* gilroy-extrabold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gilroy-extrabold.ttf"; sourceTree = "<group>"; };
-		3CE998622247FAE2002CC0F3 /* Radomir Tinkov - Gilroy-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radomir Tinkov - Gilroy-Light.otf"; sourceTree = "<group>"; };
+		3CE998612247FAE2002CC0F3 /* Gilroy-Extrabold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Extrabold.ttf"; sourceTree = "<group>"; };
+		3CE998622247FAE2002CC0F3 /* Gilroy-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Light.otf"; sourceTree = "<group>"; };
 		3CEA5A032253D34200009B94 /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
-		3CEA5A052253D9DB00009B94 /* ConstManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstManager.swift; sourceTree = "<group>"; };
+		3CEA5A052253D9DB00009B94 /* UtilManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilManager.swift; sourceTree = "<group>"; };
 		3CECBE9822561AE9000E3487 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		3CEF72FB224A515A00000936 /* GameCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,8 +54,8 @@
 		3CDE52282247E8220064BF37 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				3CE998622247FAE2002CC0F3 /* Radomir Tinkov - Gilroy-Light.otf */,
-				3CE998612247FAE2002CC0F3 /* gilroy-extrabold.ttf */,
+				3CE998622247FAE2002CC0F3 /* Gilroy-Light.otf */,
+				3CE998612247FAE2002CC0F3 /* Gilroy-Extrabold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -90,7 +90,7 @@
 				3CE237912247A8340049C29B /* Info.plist */,
 				3CE237892247A82F0049C29B /* MineSweeper.xcdatamodeld */,
 				3CEA5A032253D34200009B94 /* CellData.swift */,
-				3CEA5A052253D9DB00009B94 /* ConstManager.swift */,
+				3CEA5A052253D9DB00009B94 /* UtilManager.swift */,
 				3CECBE9822561AE9000E3487 /* GameBoard.swift */,
 			);
 			path = MineSweeper;
@@ -155,10 +155,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CE237902247A8340049C29B /* LaunchScreen.storyboard in Resources */,
-				3CE998642247FAE3002CC0F3 /* Radomir Tinkov - Gilroy-Light.otf in Resources */,
+				3CE998642247FAE3002CC0F3 /* Gilroy-Light.otf in Resources */,
 				3CE2378D2247A8340049C29B /* Assets.xcassets in Resources */,
 				3CE237882247A82F0049C29B /* Main.storyboard in Resources */,
-				3CE998632247FAE3002CC0F3 /* gilroy-extrabold.ttf in Resources */,
+				3CE998632247FAE3002CC0F3 /* Gilroy-Extrabold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,7 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CDE52272247E5720064BF37 /* GameViewController.swift in Sources */,
-				3CEA5A062253D9DB00009B94 /* ConstManager.swift in Sources */,
+				3CEA5A062253D9DB00009B94 /* UtilManager.swift in Sources */,
 				3CE237852247A82F0049C29B /* MainMenuViewController.swift in Sources */,
 				3CE2378B2247A82F0049C29B /* MineSweeper.xcdatamodeld in Sources */,
 				3CECBE9922561AE9000E3487 /* GameBoard.swift in Sources */,
