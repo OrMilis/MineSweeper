@@ -17,7 +17,7 @@ class GameBoard {
     
     var isBoardSet = false;
     
-    init(boardSize: Int, bombCount: Int) {
+    init(boardSize: Int = 1, bombCount: Int = 1) {
         self.boardSize = boardSize;
         self.bombCount = bombCount;
         
@@ -76,31 +76,11 @@ class GameBoard {
             }
             return (row, col);
         });
-    
-        /*print("Bombs At: ");
-        dump(bombPositions);
-        printBoard();*/
-        
-        /*print("CalcBombArea: ");
-        dump(bombAreaArr);
-        print("DONE!");*/
-        
-        /*let bombLeftUpCorner = (row: bombRow - 1, col: bombCol - 1);
-        let bombRightDownCorner = (row: bombRow + 1, col: bombCol + 1);*/
-        /*for row in bombLeftUpCorner.row...bombRightDownCorner.row {
-            for col in bombLeftUpCorner.col...bombRightDownCorner.col {
-                if(row < 0 || row >= boardSize || col < 0 || col >= boardSize) { continue; };
-                
-                let cell = board[row][col];
-                if(cell.GetCellType() == CellData.CellState.HIDDEN_VALUE) {
-                    cell.IncrementValue();
-                }
-            }
-        }*/
     }
     
-    public func touchCell(cellIndexPath: IndexPath) -> [IndexPath] {
+    public func touchCell(cellIndexPath: IndexPath) -> (modifiedCells: [IndexPath], isLost: Bool) {
         
+        let isLost: Bool;
         let cellIndex = tupleToIndex(tuple: (cellIndexPath.section, cellIndexPath.item));
         
         if(!isBoardSet) {
@@ -108,14 +88,29 @@ class GameBoard {
             setUpBoard(startCellIndex: cellIndex);
         }
         
-        //print("touchCell(cellIndex:) = ", cellIndex);
-        
         let modifiedCells: [IndexPath];
         if(isCellBomb(cellIndex: cellIndex)){
             modifiedCells = openAll();
+            isLost = true;
         }
         else {
             modifiedCells = openCell(cellIndex: cellIndex);
+            isLost = false;
+        }
+        
+        return (modifiedCells, isLost);
+    }
+    
+    func markCellAsFlag(cellIndexPath: IndexPath) -> [IndexPath] {
+        var modifiedCells = [IndexPath]();
+        
+        let cellIndex = tupleToIndex(tuple: (cellIndexPath.section, cellIndexPath.item));
+        let cellTuple = indexToTuple(index: cellIndex);
+        let cell = board[cellTuple.row][cellTuple.col];
+        
+        if(!cell.IsCellOpen()) {
+            cell.GetCellType() == CellData.CellState.FLAG ? cell.cancelFlagMark() : cell.setAsFlag();
+            modifiedCells.append(cellIndexPath);
         }
         
         return modifiedCells;

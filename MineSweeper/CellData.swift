@@ -23,6 +23,19 @@ class CellData {
         self.cellValue = -1;
     }
     
+    public func setAsFlag() {
+        self.cellType = CellState.FLAG;
+    }
+    
+    public func cancelFlagMark() {
+        if (cellValue != -1) {
+            cellType = CellState.HIDDEN_VALUE;
+        }
+        else {
+            cellType = CellState.HIDDEN_BOMB;
+        }
+    }
+    
     public func IncrementValue() {
         self.cellValue += 1;
     }

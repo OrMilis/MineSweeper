@@ -10,6 +10,8 @@ import UIKit
 
 class GameViewController: UIViewController {
 
+    @IBOutlet weak var gameCollectionView: UICollectionView!
+    
     private let sectionInsets = UIEdgeInsets(top: 4.0, left: 4.0, bottom: 0.0, right: 4.0);
     
     var bombPositions = [Int]();
@@ -17,25 +19,30 @@ class GameViewController: UIViewController {
     var boardSize = 5;
     var bombCount = 10;
     
-    var gameBoard: GameBoard = GameBoard(boardSize: 1, bombCount: 1);
+    var gameBoard: GameBoard = GameBoard();
     
     override func viewDidLoad() {
         gameBoard = GameBoard(boardSize: boardSize, bombCount: bombCount);
         super.viewDidLoad()
         
-        /*for (sectionIndex, section) in items.enumerated() {
-            for (itemIndex, _) in section.enumerated() {
-                let value = sectionIndex * 10 + itemIndex;
-                items[sectionIndex][itemIndex] = value;
-                //print(sectionIndex, itemIndex, value, separator: "  ");
-            }
-        }*/
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func handleLongPress(_ sender: UILongPressGestureRecognizer) {
+        if(sender.state == UIGestureRecognizer.State.began) {
+            let touchPoint = sender.location(in: gameCollectionView);
+            guard let indexPath = gameCollectionView.indexPathForItem(at: touchPoint) else { return; };
+            
+            let modifiedCells = gameBoard.markCellAsFlag(cellIndexPath: indexPath);
+            
+            notifyDataSetChanged(collectionView: gameCollectionView, indexPathArr: modifiedCells);
+        }
     }
     
     func notifyDataSetChanged(collectionView: UICollectionView, indexPathArr: [IndexPath]) {
         collectionView.reloadItems(at: indexPathArr);
     }
+    
     /*
     // MARK: - Navigation
 
@@ -63,25 +70,32 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
         
         let cellData = gameBoard.getCellDataAt(indexPath: indexPath);
         let cellValue = cellData.GetCellValue();
+        let cellType = cellData.GetCellType();
         
-        let cellText: String;
-        let cellTextColor: UtilManager.WarningColor;
+        var cellText = "";
+        var cellTextColor = UtilManager.WarningColor.ONE;
         let cellBackgroundColor = UtilManager.GetCellBackgroundColor(isCellOpen: cellData.IsCellOpen());
         
         print("CELL VALUE: ", cellValue);
         
-        if(cellValue > 0){
-            cellText = "\(cellValue)";
-            cellTextColor = UtilManager.WarningColor(rawValue: cellValue) ?? UtilManager.WarningColor.ONE;
-            
-        }
-        else if(cellValue == -1){
+        switch cellType {
+        case CellData.CellState.FLAG:
+            cellText = "F";
+            cellTextColor = UtilManager.WarningColor.ONE;
+        case CellData.CellState.BOMB:
             cellText = "X";
             cellTextColor = UtilManager.WarningColor.EIGHT;
-        }
-        else {
-            cellText = "";
-            cellTextColor = UtilManager.WarningColor.ONE;
+        case CellData.CellState.VALUE:
+            if(cellValue > 0){
+                cellText = "\(cellValue)";
+                cellTextColor = UtilManager.WarningColor(rawValue: cellValue) ?? UtilManager.WarningColor.ONE;
+            }
+            else {
+                cellText = "";
+                cellTextColor = UtilManager.WarningColor.ONE;
+            }
+        default:
+            break;
         }
         
         cell.cellText.text = cellText;
@@ -93,12 +107,12 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //let cell = collectionView.cellForItem(at: indexPath) as! GameCollectionCell;
-        let modifiedCells = gameBoard.touchCell(cellIndexPath: indexPath);
+        let pressData = gameBoard.touchCell(cellIndexPath: indexPath);
         
         print("AfterClick: ");
-        dump(modifiedCells);
+        dump(pressData.modifiedCells);
         
-        notifyDataSetChanged(collectionView: collectionView, indexPathArr: modifiedCells);
+        notifyDataSetChanged(collectionView: collectionView, indexPathArr: pressData.modifiedCells);
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
