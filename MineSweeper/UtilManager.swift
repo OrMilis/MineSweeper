@@ -21,7 +21,7 @@ final class UtilManager {
         func GetBoardSettings() -> (boardSize: Int, bombCount: Int){
             switch self {
             case .EASY:
-                return (5, 5);
+                return (5, 2);
             case .NORMAL:
                 return (10, 20);
             case .HARD:

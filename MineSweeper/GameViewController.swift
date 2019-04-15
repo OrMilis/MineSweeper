@@ -170,8 +170,8 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
         //let cell = collectionView.cellForItem(at: indexPath) as! GameCollectionCell;
         let pressData = gameBoard.touchCell(cellIndexPath: indexPath);
         
-        print("AfterClick: ");
-        dump(pressData.modifiedCells);
+        /*print("AfterClick: ");
+        dump(pressData.modifiedCells);*/
         
         notifyDataSetChanged(collectionView: collectionView, indexPathArr: pressData.modifiedCells);
         

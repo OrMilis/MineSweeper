@@ -84,7 +84,6 @@ class GameBoard {
     public func touchCell(cellIndexPath: IndexPath) -> (modifiedCells: [IndexPath], isWon: Bool, isLost: Bool) {
         
         let isLost: Bool;
-        let isWon: Bool = closedCells == bombCount ? true : false;
         let cellIndex = tupleToIndex(tuple: (cellIndexPath.section, cellIndexPath.item));
         
         if(!isBoardSet) {
@@ -102,6 +101,7 @@ class GameBoard {
             isLost = false;
         }
         
+        let isWon: Bool = closedCells == bombCount;
         return (modifiedCells, isWon, isLost);
     }
     
