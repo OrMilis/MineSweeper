@@ -33,16 +33,13 @@ class EndGameViewController: UIViewController {
     }
     
     @IBAction func OnAgainBtnClick(_ sender: Any) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: UtilManager.StoryBoardName, bundle: nil);
-        let gameViewController = storyBoard.instantiateViewController(withIdentifier: UtilManager.GameViewID) as! GameViewController;
-        gameViewController.setUpGameView(nickname: self.nicknameText, difficulty: self.difficulty);
-        self.present(gameViewController, animated: true, completion: nil);
+        guard let gameVc = self.navigationController?.viewControllers[0] as? GameViewController else { return; };
+        gameVc.startGame();
+        self.navigationController?.popViewController(animated: true);
     }
     
     @IBAction func OnMenuBtnClick(_ sender: Any) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: UtilManager.StoryBoardName, bundle: nil);
-        let menuViewController = storyBoard.instantiateViewController(withIdentifier: UtilManager.MainMenuID) as! MainMenuViewController;
-        self.present(menuViewController, animated: true, completion: nil);
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
     /*
     // MARK: - Navigation

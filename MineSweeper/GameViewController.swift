@@ -24,8 +24,6 @@ class GameViewController: UIViewController {
     var timerCounter: Int = 0;
     var flagCounter: Int = 0;
     
-    var bombPositions = [Int]();
-    
     var difficulty: UtilManager.Difficulty = UtilManager.Difficulty.NORMAL;
     var boardSize = 5;
     var bombCount = 10;
@@ -41,16 +39,28 @@ class GameViewController: UIViewController {
         self.boardSize = boardSettings.boardSize;
         self.bombCount = boardSettings.bombCount;
         
+        startGame();
+    }
+    
+    public func startGame() {
+        
         self.gameBoard = GameBoard(boardSize: self.boardSize, bombCount: self.bombCount);
         self.flagCounter = bombCount;
+        
+        if(timerCounter > 0) {
+            self.timerCounter = 0;
+            self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { timer in
+                self.timerCounter += 1;
+                let timerText = self.timerCounter > 999 ? 999 : self.timerCounter;
+                self.timerLabel.text = String(format: "%03d", timerText);
+            });
+            
+            self.timer.fire();
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.nameLabel.text = nickname;
-        
-        self.flagLabel.text = String(format: "%02d", self.flagCounter);
         
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { timer in
             self.timerCounter += 1;
@@ -59,8 +69,14 @@ class GameViewController: UIViewController {
         });
         
         self.timer.fire();
-        
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated);
+        self.nameLabel.text = nickname;
+        self.flagLabel.text = String(format: "%02d", self.flagCounter);
+        self.gameCollectionView.reloadData();
     }
     
     @IBAction func handleLongPress(_ sender: UILongPressGestureRecognizer) {
@@ -84,9 +100,10 @@ class GameViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
             let storyBoard: UIStoryboard = UIStoryboard(name: UtilManager.StoryBoardName, bundle: nil);
-            let endViewController = storyBoard.instantiateViewController(withIdentifier: UtilManager.EndGameID) as! EndGameViewController;
+            guard let endViewController = storyBoard.instantiateViewController(withIdentifier: UtilManager.EndGameID) as? EndGameViewController else { return; };
             endViewController.setupView(nickname: self.nickname, gameStatus: gameStatus, difficulty: self.difficulty);
-            self.present(endViewController, animated: true, completion: nil);
+            
+            self.navigationController?.pushViewController(endViewController, animated: true);
         });
     }
     
@@ -95,9 +112,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func OnBackBtnClick(_ sender: Any) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: UtilManager.StoryBoardName, bundle: nil);
-        let menuViewController = storyBoard.instantiateViewController(withIdentifier: UtilManager.MainMenuID) as! MainMenuViewController;
-        self.present(menuViewController, animated: true, completion: nil);
+        dismiss(animated: true, completion: nil)
     }
     /*
     // MARK: - Navigation

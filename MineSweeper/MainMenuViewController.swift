@@ -29,9 +29,13 @@ class MainMenuViewController: UIViewController {
         guard let nickname = nameTextBox.text else { return; };
         
         let storyBoard: UIStoryboard = UIStoryboard(name: UtilManager.StoryBoardName, bundle: nil);
-        let gameViewController = storyBoard.instantiateViewController(withIdentifier: UtilManager.GameViewID) as! GameViewController;
-        gameViewController.setUpGameView(nickname: nickname, difficulty: self.difficulty);
-        self.present(gameViewController, animated: true, completion: nil);
+        
+        guard let gameNavigationVC = storyBoard.instantiateViewController(withIdentifier: "GameNC") as? UINavigationController else { return; };
+        
+        guard let gameVC = gameNavigationVC.topViewController as? GameViewController else { return; };
+        gameVC.setUpGameView(nickname: nickname, difficulty: self.difficulty);
+        
+        self.present(gameNavigationVC, animated: true, completion: nil);
     }
     
 }
