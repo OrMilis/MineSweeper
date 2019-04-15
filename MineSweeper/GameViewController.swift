@@ -11,8 +11,18 @@ import UIKit
 class GameViewController: UIViewController {
 
     @IBOutlet weak var gameCollectionView: UICollectionView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var flagLabel: UILabel!
     
     private let sectionInsets = UIEdgeInsets(top: 4.0, left: 4.0, bottom: 0.0, right: 4.0);
+    
+    var nickname: String = "";
+    
+    var timer: Timer = Timer();
+    
+    var timerCounter: Int = 0;
+    var flagCounter: Int = 0;
     
     var bombPositions = [Int]();
     
@@ -21,9 +31,29 @@ class GameViewController: UIViewController {
     
     var gameBoard: GameBoard = GameBoard();
     
+    public func setUpGameView(nickname: String, boardSize: Int, bombCount: Int) {
+        self.nickname = nickname;
+        self.boardSize = boardSize;
+        self.bombCount = bombCount;
+        
+        self.gameBoard = GameBoard(boardSize: self.boardSize, bombCount: self.bombCount);
+        self.flagCounter = bombCount;
+    }
+    
     override func viewDidLoad() {
-        gameBoard = GameBoard(boardSize: boardSize, bombCount: bombCount);
         super.viewDidLoad()
+        
+        self.nameLabel.text = nickname;
+        
+        self.flagLabel.text = String(format: "%02d", self.flagCounter);
+        
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { timer in
+            self.timerCounter += 1;
+            let timerText = self.timerCounter > 999 ? 999 : self.timerCounter;
+            self.timerLabel.text = String(format: "%03d", timerText);
+        });
+        
+        self.timer.fire();
         
         // Do any additional setup after loading the view.
     }
@@ -33,16 +63,37 @@ class GameViewController: UIViewController {
             let touchPoint = sender.location(in: gameCollectionView);
             guard let indexPath = gameCollectionView.indexPathForItem(at: touchPoint) else { return; };
             
-            let modifiedCells = gameBoard.markCellAsFlag(cellIndexPath: indexPath);
-            
-            notifyDataSetChanged(collectionView: gameCollectionView, indexPathArr: modifiedCells);
+            if(flagCounter > 0){
+                let pressData = gameBoard.markCellAsFlag(cellIndexPath: indexPath);
+                
+                flagCounter -= pressData.placedFlags;
+                flagLabel.text = String(format: "%02d", flagCounter);
+                
+                notifyDataSetChanged(collectionView: gameCollectionView, indexPathArr: pressData.modifiedCells);
+            }
         }
+    }
+    
+    func endGame(gameStatus: String) {
+        self.timer.invalidate();
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+            let storyBoard: UIStoryboard = UIStoryboard(name: UtilManager.StoryBoardName, bundle: nil);
+            let endViewController = storyBoard.instantiateViewController(withIdentifier: UtilManager.EndGameID) as! EndGameViewController;
+            endViewController.setupView(nickname: self.nickname, gameStatus: gameStatus, boardSize: self.boardSize, bombCount: self.bombCount);
+            self.present(endViewController, animated: true, completion: nil);
+        });
     }
     
     func notifyDataSetChanged(collectionView: UICollectionView, indexPathArr: [IndexPath]) {
         collectionView.reloadItems(at: indexPathArr);
     }
     
+    @IBAction func OnBackBtnClick(_ sender: Any) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: UtilManager.StoryBoardName, bundle: nil);
+        let menuViewController = storyBoard.instantiateViewController(withIdentifier: UtilManager.MainMenuID) as! MainMenuViewController;
+        self.present(menuViewController, animated: true, completion: nil);
+    }
     /*
     // MARK: - Navigation
 
@@ -76,15 +127,20 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
         var cellTextColor = UtilManager.WarningColor.ONE;
         let cellBackgroundColor = UtilManager.GetCellBackgroundColor(isCellOpen: cellData.IsCellOpen());
         
-        print("CELL VALUE: ", cellValue);
+        //print("CELL VALUE: ", cellValue);
+        if(cell.cellImage.image != nil) {
+            cell.cellImage.image = nil;
+        }
         
         switch cellType {
         case CellData.CellState.FLAG:
-            cellText = "F";
+            cellText = "";
             cellTextColor = UtilManager.WarningColor.ONE;
+            cell.cellImage.image = UIImage(named: "FlagIcon");
         case CellData.CellState.BOMB:
-            cellText = "X";
+            cellText = "";
             cellTextColor = UtilManager.WarningColor.EIGHT;
+            cell.cellImage.image = UIImage(named: "Mine");
         case CellData.CellState.VALUE:
             if(cellValue > 0){
                 cellText = "\(cellValue)";
@@ -113,6 +169,15 @@ extension GameViewController: UICollectionViewDataSource, UICollectionViewDelega
         dump(pressData.modifiedCells);
         
         notifyDataSetChanged(collectionView: collectionView, indexPathArr: pressData.modifiedCells);
+        
+        if(pressData.isLost) {
+            endGame(gameStatus: "LOST");
+        }
+        else if(pressData.isWon) {
+            endGame(gameStatus: "WON");
+        }
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

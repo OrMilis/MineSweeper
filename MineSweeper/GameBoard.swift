@@ -17,9 +17,12 @@ class GameBoard {
     
     var isBoardSet = false;
     
+    var closedCells: Int;
+    
     init(boardSize: Int = 1, bombCount: Int = 1) {
         self.boardSize = boardSize;
         self.bombCount = bombCount;
+        self.closedCells = boardSize * boardSize;
         
         for _ in 0...boardSize - 1 {
             var tempArr = [CellData]();
@@ -78,9 +81,10 @@ class GameBoard {
         });
     }
     
-    public func touchCell(cellIndexPath: IndexPath) -> (modifiedCells: [IndexPath], isLost: Bool) {
+    public func touchCell(cellIndexPath: IndexPath) -> (modifiedCells: [IndexPath], isWon: Bool, isLost: Bool) {
         
         let isLost: Bool;
+        let isWon: Bool = closedCells == bombCount ? true : false;
         let cellIndex = tupleToIndex(tuple: (cellIndexPath.section, cellIndexPath.item));
         
         if(!isBoardSet) {
@@ -98,22 +102,30 @@ class GameBoard {
             isLost = false;
         }
         
-        return (modifiedCells, isLost);
+        return (modifiedCells, isWon, isLost);
     }
     
-    func markCellAsFlag(cellIndexPath: IndexPath) -> [IndexPath] {
+    func markCellAsFlag(cellIndexPath: IndexPath) -> (modifiedCells: [IndexPath], placedFlags: Int) {
         var modifiedCells = [IndexPath]();
+        var placedFlags = 0;
         
         let cellIndex = tupleToIndex(tuple: (cellIndexPath.section, cellIndexPath.item));
         let cellTuple = indexToTuple(index: cellIndex);
         let cell = board[cellTuple.row][cellTuple.col];
         
         if(!cell.IsCellOpen()) {
-            cell.GetCellType() == CellData.CellState.FLAG ? cell.cancelFlagMark() : cell.setAsFlag();
+            if(cell.GetCellType() == CellData.CellState.FLAG) {
+                cell.cancelFlagMark();
+                placedFlags = -1;
+            }
+            else {
+                cell.setAsFlag();
+                placedFlags = 1;
+            }
             modifiedCells.append(cellIndexPath);
         }
         
-        return modifiedCells;
+        return (modifiedCells, placedFlags);
     }
     
     func openCell(cellIndex: Int) -> [IndexPath] {
@@ -131,6 +143,7 @@ class GameBoard {
         case CellData.CellState.HIDDEN_VALUE:
             
             cell.OpenCell();
+            closedCells -= 1;
             indexPathArr.append(IndexPath(item: cellTuple.col, section: cellTuple.row));
             
             if(cell.GetCellValue() > 0) {

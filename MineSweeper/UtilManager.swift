@@ -9,6 +9,10 @@
 import UIKit
 
 final class UtilManager {
+    public static let StoryBoardName: String = "Main";
+    public static let MainMenuID: String = "MainMenu";
+    public static let GameViewID: String = "GameView";
+    public static let EndGameID: String = "EndGame";
     public static let GameCellID: String = "GameCell";
     
     public enum WarningColor : Int {

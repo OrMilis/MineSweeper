@@ -25,8 +25,9 @@ class MainMenuViewController: UIViewController {
         guard let nickname = nameTextBox.text else { return; };
         nameLabel.text = nickname;
         
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil);
-        let gameViewController = storyBoard.instantiateViewController(withIdentifier: "GameView") as! GameViewController;
+        let storyBoard: UIStoryboard = UIStoryboard(name: UtilManager.StoryBoardName, bundle: nil);
+        let gameViewController = storyBoard.instantiateViewController(withIdentifier: UtilManager.GameViewID) as! GameViewController;
+        gameViewController.setUpGameView(nickname: nickname, boardSize: 10, bombCount: 20);
         self.present(gameViewController, animated: true, completion: nil);
     }
     

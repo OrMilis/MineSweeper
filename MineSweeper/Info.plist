@@ -37,7 +37,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Gilroy-Light.otf</string>
-		<string>Gilroy-Extrabold.otf</string>
+		<string>Gilroy-Extrabold.ttf</string>
+		<string>Canter-Bold.otf</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
