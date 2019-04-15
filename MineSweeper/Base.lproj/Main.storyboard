@@ -26,36 +26,80 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhb-tG-afp">
-                                <rect key="frame" x="166" y="269" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzQ-La-NXt">
+                                <rect key="frame" x="16" y="262.5" width="343" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="bzQ-La-NXt" secondAttribute="height" multiplier="343:43" id="eFk-1i-rh2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Gilroy-ExtraBold" family="Gilroy" pointSize="35"/>
+                                <color key="textColor" red="0.86274509799999999" green="0.4431372549" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeo-w7-jXu">
-                                <rect key="frame" x="164" y="377" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="nameBtnOnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dnp-Qd-Nsm"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="PigeonFish" textAlignment="natural" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="G5I-nw-zSr">
-                                <rect key="frame" x="82" y="318" width="210" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9sa-eX-K7U" userLabel="Buttons Area">
+                                <rect key="frame" x="16" y="371.5" width="343" height="287.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tX-8i-LDs" userLabel="Difficulty">
+                                        <rect key="frame" x="114" y="0.0" width="115" height="115"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="3tX-8i-LDs" secondAttribute="height" multiplier="1:1" id="UYI-7q-pjA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gilroy-ExtraBold" family="Gilroy" pointSize="22"/>
+                                        <state key="normal" title="NORMAL" backgroundImage="MenuBtn">
+                                            <color key="titleColor" red="1" green="0.97213298079999999" blue="0.94091111419999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="changeDifficulty:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9FO-He-B8x"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZ5-al-37f" userLabel="Play">
+                                        <rect key="frame" x="85.5" y="115" width="172" height="172.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="CZ5-al-37f" secondAttribute="height" multiplier="1:1" id="JQp-bA-nT2"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gilroy-ExtraBold" family="Gilroy" pointSize="45"/>
+                                        <state key="normal" title="PLAY" backgroundImage="MenuBtn">
+                                            <color key="titleColor" red="1" green="0.97213298079999999" blue="0.94091111419999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="OnPlayBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0tp-o1-RvK"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="3tX-8i-LDs" firstAttribute="top" secondItem="9sa-eX-K7U" secondAttribute="top" id="308-Ow-cFN"/>
+                                    <constraint firstItem="CZ5-al-37f" firstAttribute="centerX" secondItem="9sa-eX-K7U" secondAttribute="centerX" id="6MF-kO-q7f"/>
+                                    <constraint firstItem="3tX-8i-LDs" firstAttribute="bottom" secondItem="CZ5-al-37f" secondAttribute="top" id="Ddq-u2-cx3"/>
+                                    <constraint firstItem="3tX-8i-LDs" firstAttribute="centerX" secondItem="9sa-eX-K7U" secondAttribute="centerX" id="Jr4-ru-HGf"/>
+                                    <constraint firstItem="CZ5-al-37f" firstAttribute="height" secondItem="3tX-8i-LDs" secondAttribute="height" multiplier="1.5" id="aIC-v8-e5p"/>
+                                    <constraint firstAttribute="bottom" secondItem="CZ5-al-37f" secondAttribute="bottom" id="lFt-HF-3Fk"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="PigeonFish" textAlignment="natural" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="G5I-nw-zSr">
+                                <rect key="frame" x="69" y="312" width="237" height="42"/>
                                 <color key="backgroundColor" red="0.91764705882352937" green="0.8784313725490196" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="G5I-nw-zSr" secondAttribute="height" multiplier="79:14" id="XmG-JZ-3hw"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.99607843137254903" green="0.94901960784313721" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="9sa-eX-K7U" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="8du-rC-CKq"/>
+                            <constraint firstItem="bzQ-La-NXt" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="YhM-Vv-OOH"/>
+                            <constraint firstItem="9sa-eX-K7U" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-8" id="Zgk-tY-X6K"/>
+                            <constraint firstItem="9sa-eX-K7U" firstAttribute="top" secondItem="G5I-nw-zSr" secondAttribute="bottom" constant="20" id="eZ4-Bd-DXT"/>
+                            <constraint firstItem="G5I-nw-zSr" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="fGJ-eJ-ZlF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9sa-eX-K7U" secondAttribute="trailing" constant="16" id="iDW-jc-7Ec"/>
+                            <constraint firstItem="G5I-nw-zSr" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="jXj-7Y-YHT"/>
+                            <constraint firstItem="bzQ-La-NXt" firstAttribute="bottom" secondItem="G5I-nw-zSr" secondAttribute="top" constant="-30" id="oNq-SO-hfI"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="applyNameBtn" destination="aeo-w7-jXu" id="iEy-Z1-GH5"/>
-                        <outlet property="nameLabel" destination="yhb-tG-afp" id="ur6-6w-4RD"/>
+                        <outlet property="difficultyBtn" destination="3tX-8i-LDs" id="2MQ-yn-ICL"/>
                         <outlet property="nameTextBox" destination="G5I-nw-zSr" id="h3w-mW-RLY"/>
                     </connections>
                 </viewController>
@@ -372,6 +416,7 @@
     <resources>
         <image name="FlagIcon" width="453" height="578"/>
         <image name="Menu" width="43" height="43"/>
+        <image name="MenuBtn" width="275" height="273"/>
         <image name="PlayAgain" width="110" height="43"/>
         <image name="TimerIcon" width="453" height="578"/>
     </resources>

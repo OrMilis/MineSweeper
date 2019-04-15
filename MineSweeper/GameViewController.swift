@@ -26,15 +26,20 @@ class GameViewController: UIViewController {
     
     var bombPositions = [Int]();
     
+    var difficulty: UtilManager.Difficulty = UtilManager.Difficulty.NORMAL;
     var boardSize = 5;
     var bombCount = 10;
     
     var gameBoard: GameBoard = GameBoard();
     
-    public func setUpGameView(nickname: String, boardSize: Int, bombCount: Int) {
+    public func setUpGameView(nickname: String, difficulty: UtilManager.Difficulty) {
         self.nickname = nickname;
-        self.boardSize = boardSize;
-        self.bombCount = bombCount;
+        
+        self.difficulty = difficulty;
+        let boardSettings = difficulty.GetBoardSettings();
+        
+        self.boardSize = boardSettings.boardSize;
+        self.bombCount = boardSettings.bombCount;
         
         self.gameBoard = GameBoard(boardSize: self.boardSize, bombCount: self.bombCount);
         self.flagCounter = bombCount;
@@ -80,7 +85,7 @@ class GameViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
             let storyBoard: UIStoryboard = UIStoryboard(name: UtilManager.StoryBoardName, bundle: nil);
             let endViewController = storyBoard.instantiateViewController(withIdentifier: UtilManager.EndGameID) as! EndGameViewController;
-            endViewController.setupView(nickname: self.nickname, gameStatus: gameStatus, boardSize: self.boardSize, bombCount: self.bombCount);
+            endViewController.setupView(nickname: self.nickname, gameStatus: gameStatus, difficulty: self.difficulty);
             self.present(endViewController, animated: true, completion: nil);
         });
     }

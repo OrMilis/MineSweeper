@@ -15,14 +15,12 @@ class EndGameViewController: UIViewController {
     
     var nicknameText: String = "";
     var gameStatusText: String = "";
-    var boardSize: Int = 0;
-    var bombCount: Int = 0;
+    var difficulty: UtilManager.Difficulty = UtilManager.Difficulty.NORMAL;
     
-    public func setupView(nickname: String, gameStatus: String, boardSize: Int, bombCount: Int) {
+    public func setupView(nickname: String, gameStatus: String, difficulty: UtilManager.Difficulty) {
         self.nicknameText = nickname;
         self.gameStatusText = gameStatus;
-        self.boardSize = boardSize;
-        self.bombCount = bombCount;
+        self.difficulty = difficulty;
     }
     
     override func viewDidLoad() {
@@ -37,7 +35,7 @@ class EndGameViewController: UIViewController {
     @IBAction func OnAgainBtnClick(_ sender: Any) {
         let storyBoard: UIStoryboard = UIStoryboard(name: UtilManager.StoryBoardName, bundle: nil);
         let gameViewController = storyBoard.instantiateViewController(withIdentifier: UtilManager.GameViewID) as! GameViewController;
-        gameViewController.setUpGameView(nickname: self.nicknameText, boardSize: self.boardSize, bombCount: self.bombCount);
+        gameViewController.setUpGameView(nickname: self.nicknameText, difficulty: self.difficulty);
         self.present(gameViewController, animated: true, completion: nil);
     }
     

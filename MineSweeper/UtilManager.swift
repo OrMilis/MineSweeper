@@ -15,6 +15,32 @@ final class UtilManager {
     public static let EndGameID: String = "EndGame";
     public static let GameCellID: String = "GameCell";
     
+    public enum Difficulty: String {
+        case EASY, NORMAL, HARD;
+        
+        func GetBoardSettings() -> (boardSize: Int, bombCount: Int){
+            switch self {
+            case .EASY:
+                return (5, 5);
+            case .NORMAL:
+                return (10, 20);
+            case .HARD:
+                return (10, 30);
+            }
+        }
+        
+        func GetNextDifficulty() -> Difficulty {
+            switch self{
+            case .EASY:
+                return .NORMAL;
+            case .NORMAL:
+                return .HARD;
+            case .HARD:
+                return .EASY;
+            }
+        }
+    }
+    
     public enum WarningColor : Int {
         
         case ONE = 1,
