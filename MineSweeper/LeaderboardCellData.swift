@@ -22,5 +22,27 @@ class LeaderboardCellData {
         self.lat = lat;
         self.lng = lng;
     }
+    
+    public func GetName() -> String {
+        return self.name;
+    }
+    
+    public func GetScore() -> Int {
+        return self.score;
+    }
+    
+    public func GetLat() -> Float {
+        return self.lat;
+    }
+    
+    public func GetLng() -> Float {
+        return self.lng;
+    }
+    
+    public func GetDict() -> [String : Any] {
+        return ["score" : self.score,
+                "lat" : self.lat,
+                "lng" : self.lng]
+    }
 
 }

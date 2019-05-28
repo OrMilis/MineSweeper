@@ -26,7 +26,7 @@ class MainMenuViewController: UIViewController {
     }
     
     @IBAction func OnPlayBtnClick(_ sender: Any) {
-        guard let nickname = nameTextBox.text else { return; };
+        /*guard let nickname = nameTextBox.text else { return; };
         
         let storyBoard: UIStoryboard = UIStoryboard(name: UtilManager.StoryBoardName, bundle: nil);
         
@@ -35,7 +35,12 @@ class MainMenuViewController: UIViewController {
         guard let gameVC = gameNavigationVC.topViewController as? GameViewController else { return; };
         gameVC.setUpGameView(nickname: nickname, difficulty: self.difficulty);
         
-        self.present(gameNavigationVC, animated: true, completion: nil);
+        self.present(gameNavigationVC, animated: true, completion: nil);*/
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: UtilManager.StoryBoardName, bundle: nil);
+        guard let endViewController = storyBoard.instantiateViewController(withIdentifier: UtilManager.LeaderboardViewID) as? LeaderboardViewController else { return; };
+        
+        self.navigationController?.pushViewController(endViewController, animated: true);
     }
     
 }

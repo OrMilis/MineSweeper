@@ -14,6 +14,8 @@ final class UtilManager {
     public static let GameViewID: String = "GameView";
     public static let EndGameID: String = "EndGame";
     public static let GameCellID: String = "GameCell";
+    public static let LeaderboardViewID: String = "LeaderboardView";
+    public static let LeaderboardCellID: String = "LeaderboardCell";
     
     public enum Difficulty: String {
         case EASY, NORMAL, HARD;
