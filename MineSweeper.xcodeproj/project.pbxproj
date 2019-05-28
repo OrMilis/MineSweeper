@@ -19,10 +19,13 @@
 		3CE5635F2263E8F0003845AD /* Gilroy-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CE5635B2263E8EE003845AD /* Gilroy-Light.otf */; };
 		3CE563602263E8F0003845AD /* Gilroy-Extrabold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CE5635C2263E8EF003845AD /* Gilroy-Extrabold.ttf */; };
 		3CE563642263E9DD003845AD /* Canter-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CE563632263E9DD003845AD /* Canter-Bold.otf */; };
+		3CE772BD229C2A5B00235C9C /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE772BC229C2A5B00235C9C /* LeaderboardViewController.swift */; };
 		3CEA5A042253D34200009B94 /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA5A032253D34200009B94 /* CellData.swift */; };
 		3CEA5A062253D9DB00009B94 /* UtilManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA5A052253D9DB00009B94 /* UtilManager.swift */; };
 		3CECBE9922561AE9000E3487 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CECBE9822561AE9000E3487 /* GameBoard.swift */; };
 		3CEF72FC224A515A00000936 /* GameCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF72FB224A515A00000936 /* GameCollectionCell.swift */; };
+		3CFED2E7229C9E56005F27E5 /* LeaderboardCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFED2E6229C9E56005F27E5 /* LeaderboardCellData.swift */; };
+		3CFED2E9229CA461005F27E5 /* LeaderboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFED2E8229CA461005F27E5 /* LeaderboardCell.swift */; };
 		F49D6794918A3DC82439BF4D /* Pods_MineSweeper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E97F3C0816782048129CDE /* Pods_MineSweeper.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,10 +44,13 @@
 		3CE5635B2263E8EE003845AD /* Gilroy-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Light.otf"; sourceTree = "<group>"; };
 		3CE5635C2263E8EF003845AD /* Gilroy-Extrabold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Extrabold.ttf"; sourceTree = "<group>"; };
 		3CE563632263E9DD003845AD /* Canter-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Canter-Bold.otf"; sourceTree = "<group>"; };
+		3CE772BC229C2A5B00235C9C /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
 		3CEA5A032253D34200009B94 /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
 		3CEA5A052253D9DB00009B94 /* UtilManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilManager.swift; sourceTree = "<group>"; };
 		3CECBE9822561AE9000E3487 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		3CEF72FB224A515A00000936 /* GameCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionCell.swift; sourceTree = "<group>"; };
+		3CFED2E6229C9E56005F27E5 /* LeaderboardCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardCellData.swift; sourceTree = "<group>"; };
+		3CFED2E8229CA461005F27E5 /* LeaderboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardCell.swift; sourceTree = "<group>"; };
 		454472129E0734C5E661C500 /* Pods-MineSweeper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MineSweeper.debug.xcconfig"; path = "Target Support Files/Pods-MineSweeper/Pods-MineSweeper.debug.xcconfig"; sourceTree = "<group>"; };
 		84683F4E7A15FCEEAF14BDE7 /* Pods-MineSweeper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MineSweeper.release.xcconfig"; path = "Target Support Files/Pods-MineSweeper/Pods-MineSweeper.release.xcconfig"; sourceTree = "<group>"; };
 		E8E97F3C0816782048129CDE /* Pods_MineSweeper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MineSweeper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +114,9 @@
 				3CEA5A052253D9DB00009B94 /* UtilManager.swift */,
 				3CECBE9822561AE9000E3487 /* GameBoard.swift */,
 				3C4DFF242263F77D007C5B6C /* EndGameViewController.swift */,
+				3CE772BC229C2A5B00235C9C /* LeaderboardViewController.swift */,
+				3CFED2E6229C9E56005F27E5 /* LeaderboardCellData.swift */,
+				3CFED2E8229CA461005F27E5 /* LeaderboardCell.swift */,
 			);
 			path = MineSweeper;
 			sourceTree = "<group>";
@@ -249,10 +258,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CDE52272247E5720064BF37 /* GameViewController.swift in Sources */,
+				3CFED2E9229CA461005F27E5 /* LeaderboardCell.swift in Sources */,
 				3CEA5A062253D9DB00009B94 /* UtilManager.swift in Sources */,
+				3CE772BD229C2A5B00235C9C /* LeaderboardViewController.swift in Sources */,
 				3CE237852247A82F0049C29B /* MainMenuViewController.swift in Sources */,
 				3CE2378B2247A82F0049C29B /* MineSweeper.xcdatamodeld in Sources */,
 				3CECBE9922561AE9000E3487 /* GameBoard.swift in Sources */,
+				3CFED2E7229C9E56005F27E5 /* LeaderboardCellData.swift in Sources */,
 				3CE237832247A82F0049C29B /* AppDelegate.swift in Sources */,
 				3CEF72FC224A515A00000936 /* GameCollectionCell.swift in Sources */,
 				3CEA5A042253D34200009B94 /* CellData.swift in Sources */,
