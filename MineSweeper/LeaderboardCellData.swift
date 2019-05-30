@@ -7,20 +7,25 @@
 //
 
 import UIKit
+import MapKit
 
-class LeaderboardCellData {
+class LeaderboardCellData: NSObject, MKAnnotation {
     
     private var name: String;
     private var score: Int;
-    private var lat: Float;
-    private var lng: Float;
+    private var lat: Double;
+    private var lng: Double;
+    private var difficulty: String;
+    var coordinate: CLLocationCoordinate2D
     
-    
-    init(name: String, score: Int, lat: Float, lng: Float) {
+    init(name: String, score: Int, lat: Double, lng: Double, difficulty: String) {
         self.name = name;
         self.score = score;
         self.lat = lat;
         self.lng = lng;
+        self.difficulty = difficulty;
+        
+        self.coordinate = CLLocationCoordinate2D(latitude: self.lat, longitude: self.lng);
     }
     
     public func GetName() -> String {
@@ -31,11 +36,11 @@ class LeaderboardCellData {
         return self.score;
     }
     
-    public func GetLat() -> Float {
+    public func GetLat() -> Double {
         return self.lat;
     }
     
-    public func GetLng() -> Float {
+    public func GetLng() -> Double {
         return self.lng;
     }
     
@@ -43,6 +48,14 @@ class LeaderboardCellData {
         return ["score" : self.score,
                 "lat" : self.lat,
                 "lng" : self.lng]
+    }
+    
+    var title: String? {
+        return self.name
+    }
+    
+    var subtitle: String? {
+        return difficulty + ": " + String(self.score)
     }
 
 }

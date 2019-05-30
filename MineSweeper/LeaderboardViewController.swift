@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import MapKit
 import FirebaseDatabase
 
 class LeaderboardViewController: UIViewController {
 
     var ref: DatabaseReference! = Database.database().reference();
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var mapView: MKMapView!
     
     var listData = [LeaderboardCellData]();
     
@@ -20,14 +24,36 @@ class LeaderboardViewController: UIViewController {
 
         /*listData.append(LeaderboardCellData(name: "Fish1", score: 1280, lat: 1.2366, lng: 2.558));
         listData.append(LeaderboardCellData(name: "Fish2", score: 231, lat: 3.256, lng: 25.366));
-        listData.append(LeaderboardCellData(name: "Fish3", score: 5223, lat: 13.2236, lng: 2.2441));*/
+        listData.append(LeaderboardCellData(name: "Fish3", score: 5223, lat: 13.2236, lng: 2.2441));
         
-        //self.ref.child("users").child(listData[0].GetName()).setValue(listData[0].GetDict());
+        self.ref.child("users").child(listData[1].GetName()).setValue(listData[1].GetDict());*/
         
+        self.ref.child("users").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+            for child in snapshot.children {
+                guard let temp = child as? DataSnapshot else { continue };
+                guard let tempDict = temp.value as? NSDictionary else { continue };
+                guard let score = tempDict.value(forKey: "score") as? Int else { continue };
+                guard let lat = tempDict.value(forKey: "lat") as? Double else { continue };
+                guard let lng = tempDict.value(forKey: "lng") as? Double else { continue };
+                guard let difficulty = tempDict.value(forKey: "difficulty") as? String else { continue };
+                
+                let cellData = LeaderboardCellData(name: temp.key, score: score, lat: lat, lng: lng, difficulty: difficulty);
+                self.listData.append(cellData)
+                self.mapView.addAnnotation(cellData);
+                print(tempDict);
+            }
+            self.tableView.reloadData();
+            self.centerMapOnLocation(location: CLLocation(latitude: self.listData[0].GetLat(), longitude: self.listData[0].GetLng()));
+        })
         
         // Do any additional setup after loading the view.
     }
     
+    func centerMapOnLocation(location: CLLocation) {
+        let regionRadius: CLLocationDistance = 100000;
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius);
+        self.mapView.setRegion(coordinateRegion, animated: true)
+    }
 
     /*
     // MARK: - Navigation
