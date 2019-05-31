@@ -7,13 +7,21 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
+import SpriteKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var gameCollectionView: UICollectionView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var flagLabel: UILabel!
+    @IBOutlet weak var sceneView: SKView!
+    
+    var scene: AnimationScene?;
+    
+    let locationManager = CLLocationManager();
     
     private let sectionInsets = UIEdgeInsets(top: 4.0, left: 4.0, bottom: 0.0, right: 4.0);
     
@@ -30,6 +38,8 @@ class GameViewController: UIViewController {
     
     var gameBoard: GameBoard = GameBoard();
     
+    var userEntry: LeaderboardCellData = LeaderboardCellData(name: "", score: 0, lat: 0, lng: 0, difficulty: "");
+    
     public func setUpGameView(nickname: String, difficulty: UtilManager.Difficulty) {
         self.nickname = nickname;
         
@@ -38,6 +48,9 @@ class GameViewController: UIViewController {
         
         self.boardSize = boardSettings.boardSize;
         self.bombCount = boardSettings.bombCount;
+        
+        userEntry.SetName(name: nickname);
+        userEntry.SetDifficulty(difficulty: difficulty.rawValue);
         
         startGame();
     }
@@ -56,6 +69,7 @@ class GameViewController: UIViewController {
             });
             
             self.timer.fire();
+            self.sceneView.isHidden = true;
         }
     }
     
@@ -69,6 +83,15 @@ class GameViewController: UIViewController {
         });
         
         self.timer.fire();
+        
+        if(CLLocationManager.locationServicesEnabled()) {
+            locationManager.delegate = self;
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation();
+        }
+        
+        self.scene = AnimationScene(size: CGSize(width: self.sceneView.frame.size.width, height: self.sceneView.frame.size.height));
+        self.sceneView.presentScene(scene);
         // Do any additional setup after loading the view.
     }
     
@@ -98,10 +121,27 @@ class GameViewController: UIViewController {
     func endGame(gameStatus: String) {
         self.timer.invalidate();
         
+        self.sceneView.isHidden = false;
+        self.sceneView.isOpaque = false;
+        self.sceneView.allowsTransparency = true;
+        if let scene = self.scene {
+            scene.play(gameStatus: gameStatus);
+        }
+        let maxScore = 2000;
+        
+        let location = locationManager.location?.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0);
+        userEntry.SetLat(lat: location.latitude);
+        userEntry.SetLng(lng: location.longitude);
+        
+        
+        let scorePenalty = gameStatus == "WON" ? 0 : 2000 - difficulty.GetReverseValue() * timerCounter;
+        let score = maxScore - timerCounter * difficulty.GetReverseValue() - scorePenalty;
+        userEntry.SetScore(score: score);
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
             let storyBoard: UIStoryboard = UIStoryboard(name: UtilManager.StoryBoardName, bundle: nil);
             guard let endViewController = storyBoard.instantiateViewController(withIdentifier: UtilManager.EndGameID) as? EndGameViewController else { return; };
-            endViewController.setupView(nickname: self.nickname, gameStatus: gameStatus, difficulty: self.difficulty);
+            endViewController.setupView(nickname: self.nickname, gameStatus: gameStatus, difficulty: self.difficulty, entry: self.userEntry);
             
             self.navigationController?.pushViewController(endViewController, animated: true);
         });
@@ -114,6 +154,12 @@ class GameViewController: UIViewController {
     @IBAction func OnBackBtnClick(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    /*func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations[0];
+        self.userEntry.SetLat(lat: location.coordinate.latitude);
+        self.userEntry.SetLng(lng: location.coordinate.longitude);
+    }*/
     /*
     // MARK: - Navigation
 

@@ -14,6 +14,7 @@ class LeaderboardCell: UITableViewCell {
     @IBOutlet weak var score: UILabel!
     @IBOutlet weak var lat: UILabel!
     @IBOutlet weak var lng: UILabel!
+    @IBOutlet weak var difficulty: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

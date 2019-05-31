@@ -16,6 +16,9 @@
 		3CE2378B2247A82F0049C29B /* MineSweeper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3CE237892247A82F0049C29B /* MineSweeper.xcdatamodeld */; };
 		3CE2378D2247A8340049C29B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CE2378C2247A8340049C29B /* Assets.xcassets */; };
 		3CE237902247A8340049C29B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CE2378E2247A8340049C29B /* LaunchScreen.storyboard */; };
+		3CE340DD22A0706400AF77F8 /* AnimationScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE340DC22A0706400AF77F8 /* AnimationScene.swift */; };
+		3CE340E022A07AC000AF77F8 /* fireworks.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3CE340DE22A07ABE00AF77F8 /* fireworks.atlas */; };
+		3CE340E122A07AC000AF77F8 /* explosion.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3CE340DF22A07AC000AF77F8 /* explosion.atlas */; };
 		3CE5635F2263E8F0003845AD /* Gilroy-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CE5635B2263E8EE003845AD /* Gilroy-Light.otf */; };
 		3CE563602263E8F0003845AD /* Gilroy-Extrabold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CE5635C2263E8EF003845AD /* Gilroy-Extrabold.ttf */; };
 		3CE563642263E9DD003845AD /* Canter-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CE563632263E9DD003845AD /* Canter-Bold.otf */; };
@@ -41,6 +44,9 @@
 		3CE2378C2247A8340049C29B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3CE2378F2247A8340049C29B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CE237912247A8340049C29B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3CE340DC22A0706400AF77F8 /* AnimationScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationScene.swift; sourceTree = "<group>"; };
+		3CE340DE22A07ABE00AF77F8 /* fireworks.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fireworks.atlas; sourceTree = "<group>"; };
+		3CE340DF22A07AC000AF77F8 /* explosion.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = explosion.atlas; sourceTree = "<group>"; };
 		3CE5635B2263E8EE003845AD /* Gilroy-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Light.otf"; sourceTree = "<group>"; };
 		3CE5635C2263E8EF003845AD /* Gilroy-Extrabold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Extrabold.ttf"; sourceTree = "<group>"; };
 		3CE563632263E9DD003845AD /* Canter-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Canter-Bold.otf"; sourceTree = "<group>"; };
@@ -100,6 +106,8 @@
 		3CE237812247A82F0049C29B /* MineSweeper */ = {
 			isa = PBXGroup;
 			children = (
+				3CE340DF22A07AC000AF77F8 /* explosion.atlas */,
+				3CE340DE22A07ABE00AF77F8 /* fireworks.atlas */,
 				3CE237822247A82F0049C29B /* AppDelegate.swift */,
 				3CDE52262247E5720064BF37 /* GameViewController.swift */,
 				3CE237842247A82F0049C29B /* MainMenuViewController.swift */,
@@ -117,6 +125,7 @@
 				3CE772BC229C2A5B00235C9C /* LeaderboardViewController.swift */,
 				3CFED2E6229C9E56005F27E5 /* LeaderboardCellData.swift */,
 				3CFED2E8229CA461005F27E5 /* LeaderboardCell.swift */,
+				3CE340DC22A0706400AF77F8 /* AnimationScene.swift */,
 			);
 			path = MineSweeper;
 			sourceTree = "<group>";
@@ -203,7 +212,9 @@
 				3CE563602263E8F0003845AD /* Gilroy-Extrabold.ttf in Resources */,
 				3CE563642263E9DD003845AD /* Canter-Bold.otf in Resources */,
 				3CE5635F2263E8F0003845AD /* Gilroy-Light.otf in Resources */,
+				3CE340E122A07AC000AF77F8 /* explosion.atlas in Resources */,
 				3CE237882247A82F0049C29B /* Main.storyboard in Resources */,
+				3CE340E022A07AC000AF77F8 /* fireworks.atlas in Resources */,
 				3CE233AB22980C8400AADF11 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,6 +279,7 @@
 				3CE237832247A82F0049C29B /* AppDelegate.swift in Sources */,
 				3CEF72FC224A515A00000936 /* GameCollectionCell.swift in Sources */,
 				3CEA5A042253D34200009B94 /* CellData.swift in Sources */,
+				3CE340DD22A0706400AF77F8 /* AnimationScene.swift in Sources */,
 				3C4DFF252263F77D007C5B6C /* EndGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

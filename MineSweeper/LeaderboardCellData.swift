@@ -28,6 +28,32 @@ class LeaderboardCellData: NSObject, MKAnnotation {
         self.coordinate = CLLocationCoordinate2D(latitude: self.lat, longitude: self.lng);
     }
     
+    public func SetName(name: String) {
+        self.name = name;
+    }
+    
+    public func SetScore(score: Int) {
+        self.score = score;
+    }
+    
+    public func SetLat(lat: Double) {
+        self.lat = lat;
+        updateCoordinate();
+    }
+    
+    public func SetLng(lng: Double) {
+        self.lng = lng;
+        updateCoordinate();
+    }
+    
+    public func SetDifficulty(difficulty: String) {
+        self.difficulty = difficulty;
+    }
+    
+    private func updateCoordinate() {
+        self.coordinate = CLLocationCoordinate2D(latitude: self.lat, longitude: self.lng);
+    }
+    
     public func GetName() -> String {
         return self.name;
     }
@@ -44,10 +70,15 @@ class LeaderboardCellData: NSObject, MKAnnotation {
         return self.lng;
     }
     
+    public func GetDifficulty() -> String {
+        return self.difficulty;
+    }
+    
     public func GetDict() -> [String : Any] {
         return ["score" : self.score,
                 "lat" : self.lat,
-                "lng" : self.lng]
+                "lng" : self.lng,
+                "difficulty" : self.difficulty]
     }
     
     var title: String? {

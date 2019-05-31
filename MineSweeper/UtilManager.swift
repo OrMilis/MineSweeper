@@ -18,7 +18,7 @@ final class UtilManager {
     public static let LeaderboardCellID: String = "LeaderboardCell";
     
     public enum Difficulty: String {
-        case EASY, NORMAL, HARD;
+        case EASY = "Easy", NORMAL = "Normal", HARD = "Hard";
         
         func GetBoardSettings() -> (boardSize: Int, bombCount: Int){
             switch self {
@@ -39,6 +39,28 @@ final class UtilManager {
                 return .HARD;
             case .HARD:
                 return .EASY;
+            }
+        }
+        
+        func GetValue() -> Int {
+            switch self {
+            case .EASY:
+                return 3;
+            case .NORMAL:
+                return 2;
+            case .HARD:
+                return 1;
+            }
+        }
+        
+        func GetReverseValue() -> Int {
+            switch self {
+            case .EASY:
+                return 1;
+            case .NORMAL:
+                return 2;
+            case .HARD:
+                return 3;
             }
         }
     }

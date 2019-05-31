@@ -26,7 +26,7 @@ class LeaderboardViewController: UIViewController {
         listData.append(LeaderboardCellData(name: "Fish2", score: 231, lat: 3.256, lng: 25.366));
         listData.append(LeaderboardCellData(name: "Fish3", score: 5223, lat: 13.2236, lng: 2.2441));
         
-        self.ref.child("users").child(listData[1].GetName()).setValue(listData[1].GetDict());*/
+        */
         
         self.ref.child("users").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             for child in snapshot.children {
@@ -50,7 +50,7 @@ class LeaderboardViewController: UIViewController {
     }
     
     func centerMapOnLocation(location: CLLocation) {
-        let regionRadius: CLLocationDistance = 100000;
+        let regionRadius: CLLocationDistance = 1000000;
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius);
         self.mapView.setRegion(coordinateRegion, animated: true)
     }
@@ -78,8 +78,9 @@ extension LeaderboardViewController: UITableViewDelegate, UITableViewDataSource 
         let cellData = listData[indexPath.row];
         cell.name.text = cellData.GetName();
         cell.score.text = "\(cellData.GetScore())";
-        cell.lat.text = "\(cellData.GetLat())";
-        cell.lng.text = "\(cellData.GetLng())";
+        cell.lat.text = String(format: "%.3f", cellData.GetLat());
+        cell.lng.text = String(format: "%.3f", cellData.GetLng());
+        cell.difficulty.text = cellData.GetDifficulty();
         
         return cell;
     }

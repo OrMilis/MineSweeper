@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class EndGameViewController: UIViewController {
 
@@ -16,11 +17,15 @@ class EndGameViewController: UIViewController {
     var nicknameText: String = "";
     var gameStatusText: String = "";
     var difficulty: UtilManager.Difficulty = UtilManager.Difficulty.NORMAL;
+    var leaderboardEntry: LeaderboardCellData?;
     
-    public func setupView(nickname: String, gameStatus: String, difficulty: UtilManager.Difficulty) {
+    var ref: DatabaseReference! = Database.database().reference();
+    
+    public func setupView(nickname: String, gameStatus: String, difficulty: UtilManager.Difficulty, entry: LeaderboardCellData) {
         self.nicknameText = nickname;
         self.gameStatusText = gameStatus;
         self.difficulty = difficulty;
+        self.leaderboardEntry = entry;
     }
     
     override func viewDidLoad() {
@@ -29,6 +34,7 @@ class EndGameViewController: UIViewController {
         self.nickname.text = nicknameText;
         self.gameStatus.text = gameStatusText;
         
+        self.ref.child("users").child(leaderboardEntry!.GetName()).setValue(leaderboardEntry!.GetDict());
         // Do any additional setup after loading the view.
     }
     
